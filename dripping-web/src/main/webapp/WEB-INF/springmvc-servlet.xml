@@ -45,6 +45,6 @@
 
     <!--只扫描controller，其他类型在主配置文件中扫描 -->
     <context:component-scan
-            base-package="com"/>
+            base-package="com.xz.controller"/>
     <mvc:default-servlet-handler/>
 </beans>
