@@ -24,6 +24,11 @@
             <artifactId>dripping.dal</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.xz.dripping</groupId>
+            <artifactId>dripping.facade</artifactId>
+        </dependency>
+
         <!--Mysql-->
         <dependency>
             <groupId>mysql</groupId>
