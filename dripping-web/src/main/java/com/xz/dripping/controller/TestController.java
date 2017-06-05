@@ -1,7 +1,9 @@
-package com.xz.controller;
+package com.xz.dripping.controller;
 
+import com.xz.dripping.facade.service.TestFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +17,15 @@ public class TestController {
 
     Logger logger = LoggerFactory.getLogger(TestController.class);
 
-    @RequestMapping(value = "test",method = RequestMethod.POST)
-    public void test(){
-        int i = 1;
-        System.out.println(i);
-        logger.info("hah");
+    @Autowired
+    private TestFacade testFacade;
+
+    @RequestMapping(value = "saveTest",method = RequestMethod.POST)
+    public void saveTest(){
+        try {
+            testFacade.saveTest();
+        }catch (Exception e){
+            logger.info("创建失败");
+        }
     }
 }

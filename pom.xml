@@ -5,18 +5,23 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xz.dripping</groupId>
-    <artifactId>dripping.water</artifactId>
+    <artifactId>dripping-parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>dripping-web</module>
         <module>dripping-service</module>
+        <module>dripping-dal</module>
+        <module>dripping-facade</module>
     </modules>
 
     <properties>
-        <com.xz.dripping.service.version>1.0-SNAPSHOT</com.xz.dripping.service.version>
         <com.xz.dripping.web.version>1.0-SNAPSHOT</com.xz.dripping.web.version>
+        <com.xz.dripping.service.version>1.0-SNAPSHOT</com.xz.dripping.service.version>
+        <com.xz.dripping.dal.version>1.0-SNAPSHOT</com.xz.dripping.dal.version>
+        <com.xz.dripping.facade.version>1.0-SNAPSHOT</com.xz.dripping.facade.version>
         <org.springframework.version>4.2.6.RELEASE</org.springframework.version>
+        <mysql.version>5.1.32</mysql.version>
     </properties>
 
     <dependencyManagement>
@@ -31,6 +36,18 @@
                 <groupId>com.xz.dripping</groupId>
                 <artifactId>dripping.web</artifactId>
                 <version>${com.xz.dripping.web.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xz.dripping</groupId>
+                <artifactId>dripping.dal</artifactId>
+                <version>${com.xz.dripping.dal.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xz.dripping</groupId>
+                <artifactId>dripping.facade</artifactId>
+                <version>${com.xz.dripping.facade.version}</version>
             </dependency>
 
             <dependency>
@@ -153,6 +170,12 @@
             </dependency>
 
             <dependency>
+                <groupId>com.github.jsqlparser</groupId>
+                <artifactId>jsqlparser</artifactId>
+                <version>0.9.1</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>1.0.29</version>
@@ -162,7 +185,7 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.32</version>
+                <version>${mysql.version}</version>
             </dependency>
 
             <dependency>
@@ -306,6 +329,21 @@
                     <target>1.7</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.2</version>
+                <dependencies>
+                    <!-- 数据库驱动  -->
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql.version}</version>
+                    </dependency>
+
+                </dependencies>
             </plugin>
         </plugins>
     </build>

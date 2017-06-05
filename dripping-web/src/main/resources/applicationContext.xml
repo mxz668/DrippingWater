@@ -9,23 +9,23 @@
 
     <!--<import resource="spring-aspect.xml"/>
     <import resource="spring-dubbo.xml"/>
-    <import resource="spring-mybatis.xml"/>
     <import resource="spring-ons-topic.xml"/>-->
+    <import resource="spring-mybatis.xml"/>
+
 
     <!--开启注解功能 -->
     <context:annotation-config/>
 
     <!-- 扫描package，以完成Bean创建和自动依赖注入的功能 -->
-    <!--<context:component-scan base-package="com.zb.fincore.ams"/>-->
+    <context:component-scan base-package="com.xz.dripping"/>
 
     <!--加载配置文件 -->
-    <!--<bean id="propertyPlaceholderConfigurer"
+    <bean id="propertyPlaceholderConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
-            <list>
-                <value>file:${ENV_AMS}/env.properties</value>
-                <value>file:${ENV_AMS}/cat.properties</value>
-            </list>
+            <array>
+                <value>classpath:/env/env.properties</value>
+            </array>
         </property>
-    </bean>-->
+    </bean>
 </beans>
