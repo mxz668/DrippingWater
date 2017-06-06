@@ -181,6 +181,13 @@
                 <version>1.0.29</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.aliyun.mns</groupId>
+                <artifactId>aliyun-sdk-mns</artifactId>
+                <version>1.1.8</version>
+                <classifier>jar-with-dependencies</classifier>
+            </dependency>
+
             <!-- Mysql驱动 -->
             <dependency>
                 <groupId>mysql</groupId>

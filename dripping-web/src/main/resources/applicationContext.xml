@@ -11,6 +11,7 @@
     <import resource="spring-dubbo.xml"/>
     <import resource="spring-ons-topic.xml"/>-->
     <import resource="spring-mybatis.xml"/>
+    <import resource="spring-mns.xml"/>
 
 
     <!--开启注解功能 -->

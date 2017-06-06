@@ -3,14 +3,24 @@ package com.xz.dripping.facade.dto.req.sms;
 import com.xz.dripping.common.dto.BaseRequest;
 
 /**
+ * 发送短信请求
  * Created by MABIAO on 2017/6/5 0005.
  */
-public class SendMessegeRequest extends BaseRequest {
+public class SendMessageRequest extends BaseRequest {
 
+    /**
+     * 手机号码
+     */
     private String phoneNum;
 
-    private String templeteCode;
+    /**
+     * 模板编号
+     */
+    private String templateCode;
 
+    /**
+     * 短信内容
+     */
     private String sendContent;
 
     public String getPhoneNum() {
@@ -22,11 +32,11 @@ public class SendMessegeRequest extends BaseRequest {
     }
 
     public String getTempleteCode() {
-        return templeteCode;
+        return templateCode;
     }
 
-    public void setTempleteCode(String templeteCode) {
-        this.templeteCode = templeteCode;
+    public void setTempleteCode(String templateCode) {
+        this.templateCode = templateCode;
     }
 
     public String getSendContent() {
