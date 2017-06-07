@@ -8,10 +8,10 @@
         http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
     <!--<import resource="spring-aspect.xml"/>
-    <import resource="spring-dubbo.xml"/>
-    <import resource="spring-ons-topic.xml"/>-->
+    <import resource="spring-dubbo.xml"/>-->
     <import resource="spring-mybatis.xml"/>
     <import resource="spring-mns.xml"/>
+    <import resource="spring-ons.xml"/>
 
 
     <!--开启注解功能 -->

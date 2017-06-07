@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+    <!-- 封装集群消息生产者 -->
+    <bean id="onsProducer" class="com.xz.dripping.common.mq.OnsProducer">
+        <!-- 实际消息生产者对象 -->
+        <property name="producerBean" ref="onsProducerBean"/>
+    </bean>
+
+    <!-- 集群主题消息生产者(多台主机订阅,消息只被消费一次) -->
+    <bean id="onsProducerBean" class="com.aliyun.openservices.ons.api.bean.ProducerBean"
+          init-method="start" destroy-method="shutdown">
+        <property name="properties">
+            <map>
+               <!-- &lt;!&ndash; 生产者ID &ndash;&gt;
+                <entry key="ProducerId" value="${config.ons.producer.id}"/>
+                &lt;!&ndash; 阿里云AccessKey &ndash;&gt;
+                <entry key="AccessKey" value="${config.ons.accessKey}"/>
+                &lt;!&ndash; 阿里云SecretKey &ndash;&gt;
+                <entry key="SecretKey" value="${config.ons.secretKey}"/>
+                &lt;!&ndash; ONS服务地址 &ndash;&gt;
+                <entry key="ONSAddr" value="${config.ons.onsAddr}"/>-->
+                <entry key="ProducerId" value="PID_test_tianyu" /> <!-- CID,请替换 -->
+                <entry key="AccessKey" value="LTAIHCgkz0SQn4c9"/> <!-- ACCESS_KEY,请替换 -->
+                <entry key="SecretKey" value="G8I2BpLp9iC5Wx0J6nlmrvkjacqAKt"/><!-- SECRET_KEY,请替换 -->
+                <entry key="ONSAddr" value="http://onsaddr-internet.aliyun.com/rocketmq/nsaddr4client-internet"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 集群主题消息消费者(多台主机订阅,消息只被消费一次) -->
+    <bean id="clusterConsumer" class="com.aliyun.openservices.ons.api.bean.ConsumerBean"
+          init-method="start" destroy-method="shutdown">
+        <property name="properties">
+            <!--<map>
+                &lt;!&ndash; 消费者ID &ndash;&gt;
+                <entry key="ConsumerId" value="${config.ons.consumer.id}"/>
+                &lt;!&ndash; 阿里云AccessKey &ndash;&gt;
+                <entry key="AccessKey" value="${config.ons.accessKey}"/>
+                &lt;!&ndash; 阿里云SecretKey &ndash;&gt;
+                <entry key="SecretKey" value="${config.ons.secretKey}"/>
+                &lt;!&ndash; ONS服务地址 &ndash;&gt;
+                <entry key="ONSAddr" value="${config.ons.onsAddr}"/>
+                &lt;!&ndash; 消费模式(集群) &ndash;&gt;
+                <entry key="MessageModel" value="CLUSTERING"/>
+            </map>-->
+            <map>
+                <entry key="ConsumerId" value="CID_test_tianyu"/> <!-- CID,请替换 -->
+                <entry key="AccessKey" value="LTAIHCgkz0SQn4c9"/> <!-- ACCESS_KEY,请替换 -->
+                <entry key="SecretKey" value="G8I2BpLp9iC5Wx0J6nlmrvkjacqAKt"/><!-- SECRET_KEY,请替换 -->
+                <entry key="ONSAddr" value="http://onsaddr-internet.aliyun.com/rocketmq/nsaddr4client-internet"/>
+            </map>
+        </property>
+
+        <!-- 消息处理规则配置 -->
+        <property name="subscriptionTable">
+            <map>
+                <!-- 1 -->
+                <entry value-ref="onsListener">
+                    <key>
+                        <bean class="com.aliyun.openservices.ons.api.bean.Subscription">
+                            <!-- 消息主题 -->
+                            <property name="topic" value="test_tianyu_demo"/>
+                            <!-- 消息TAG -->
+                            <property name="expression" value="*"/>
+                        </bean>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 变更产品资产占用关系监听 -->
+    <bean id="onsListener"
+          class="com.xz.dripping.common.mq.listener.OnsListener"/>
+</beans>

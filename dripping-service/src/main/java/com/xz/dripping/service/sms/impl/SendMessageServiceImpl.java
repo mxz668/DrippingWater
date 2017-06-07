@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SendMessageServiceImpl implements SendMessageService {
 
-    @Autowired
+//    @Autowired
     private CloudAccountFactory cloudAccountFactory;
 
     @Override

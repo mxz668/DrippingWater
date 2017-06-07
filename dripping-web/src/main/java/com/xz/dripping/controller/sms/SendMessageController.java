@@ -1,6 +1,5 @@
 package com.xz.dripping.controller.sms;
 
-import com.aliyun.mns.client.CloudAccount;
 import com.xz.dripping.facade.dto.req.sms.SendMessageRequest;
 import com.xz.dripping.facade.service.sms.SendMessageFacade;
 import org.springframework.beans.factory.annotation.Autowired;
