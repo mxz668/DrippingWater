@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+    <!--<import resource="spring-aspect.xml"/>
+    <import resource="spring-dubbo.xml"/>-->
+    <import resource="spring-mybatis.xml"/>
+    <import resource="spring-mns.xml"/>
+    <import resource="spring-ons.xml"/>
+
+
+    <!--开启注解功能 -->
+    <context:annotation-config/>
+
+    <!-- 扫描package，以完成Bean创建和自动依赖注入的功能 -->
+    <context:component-scan base-package="com.xz.dripping"/>
+
+    <!--加载配置文件 -->
+    <bean id="propertyPlaceholderConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <array>
+                <value>classpath:/env/env.properties</value>
+            </array>
+        </property>
+    </bean>
+</beans>

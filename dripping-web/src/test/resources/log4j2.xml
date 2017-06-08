@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Log4j 2.x 配置文件。每30秒自动检查和应用配置文件的更新； -->
+<Configuration status="warn" monitorInterval="30" strict="true" schema="Log4J-V2.2.xsd">
+
+    <Properties>
+        <!-- 配置日志文件输出目录 -->
+        <Property name="log.path">/var/logs/mvn</Property>
+        <property name="log.pattern">%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L) - %m%n</property>
+    </Properties>
+
+    <Appenders>
+
+        <!--这个输出控制台的配置-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!-- 控制台只输出level及以上级别的信息(onMatch),其他的直接拒绝(onMismatch) -->
+            <!--<ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <!-- 输出日志的格式 -->
+            <PatternLayout pattern="${log.pattern}"/>
+        </Console>
+
+        <!-- 输出到文件，按天或者超过80MB分割 -->
+        <RollingFile name="MvnAllRollingFile" fileName="${log.path}/mvn.log"
+                     filePattern="${log.path}/mvn-%d{yyyy-MM-dd}.log">
+            <!-- 需要记录的级别 -->
+            <!--<ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <PatternLayout pattern="${log.pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="MvnErrorRollingFile" fileName="${log.path}/mvn-error.log"
+                     filePattern="${log.path}/mvn-error-%d{yyyy-MM-dd}.log">
+            <!-- 需要记录的级别 -->
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${log.pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+        <!-- 输出到文件，按天或者超过80MB分割 -->
+        <RollingFile name="MvnSQLRollingFile" fileName="${log.path}/mvn-sql.log"
+                     filePattern="${log.path}/mvn-sql-%d{yyyy-MM-dd}.log">
+            <!-- 需要记录的级别 -->
+            <!--<ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <PatternLayout pattern="${log.pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+
+        <!-- 输出到文件，按天或者超过80MB分割 -->
+        <RollingFile name="MvnSpringRollingFile" fileName="${log.path}/mvn-spring.log"
+                     filePattern="${log.path}/mvn-spring-%d{yyyy-MM-dd}.log">
+            <!-- 需要记录的级别 -->
+            <!-- <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY" /> -->
+            <PatternLayout pattern="${log.pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- 配置日志的根节点 -->
+        <root level="INFO">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="MvnAllRollingFile"/>
+        </root>
+
+        <Logger name="com.xz" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="MvnAllRollingFile"/>
+            <AppenderRef ref="MvnErrorRollingFile"/>
+        </Logger>
+
+        <Logger name="com.xz.service.dal" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="MvnSQLRollingFile"/>
+        </Logger>
+
+    </Loggers>
+
+</Configuration>
