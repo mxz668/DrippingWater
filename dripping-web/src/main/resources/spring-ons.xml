@@ -59,16 +59,16 @@
         <property name="subscriptionTable">
             <map>
                 <!-- 1 -->
-                <entry value-ref="onsListener">
-                    <key>
-                        <bean class="com.aliyun.openservices.ons.api.bean.Subscription">
-                            <!-- 消息主题 -->
-                            <property name="topic" value="test_tianyu_demo"/>
-                            <!-- 消息TAG -->
-                            <property name="expression" value="*"/>
-                        </bean>
-                    </key>
-                </entry>
+                <!--<entry value-ref="onsListener">-->
+                    <!--<key>-->
+                        <!--<bean class="com.aliyun.openservices.ons.api.bean.Subscription">-->
+                            <!--&lt;!&ndash; 消息主题 &ndash;&gt;-->
+                            <!--<property name="topic" value="test_tianyu_demo"/>-->
+                            <!--&lt;!&ndash; 消息TAG &ndash;&gt;-->
+                            <!--<property name="expression" value="*"/>-->
+                        <!--</bean>-->
+                    <!--</key>-->
+                <!--</entry>-->
             </map>
         </property>
     </bean>

@@ -324,7 +324,7 @@
             </dependency>
 
             <!--iText-->
-            <dependency>
+            <!--<dependency>
                 <groupId>com.itextpdf</groupId>
                 <artifactId>itextpdf</artifactId>
                 <version>5.5.10</version>
@@ -340,8 +340,39 @@
                 <groupId>com.itextpdf.tool</groupId>
                 <artifactId>xmlworker</artifactId>
                 <version>5.5.10</version>
-                <scope>system</scope>
-                <systemPath>E:/Maven/repository/com/itextpdf/tool/xmlworker/5.5.10/xmlworker-5.5.10.jar</systemPath>
+                &lt;!&ndash;<scope>system</scope>&ndash;&gt;
+                &lt;!&ndash;<systemPath>E:/Maven/repository/com/itextpdf/tool/xmlworker/5.5.10/xmlworker-5.5.10.jar</systemPath>&ndash;&gt;
+            </dependency>-->
+
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>itextpdf</artifactId>
+                <version>5.5.11</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>itext-pdfa</artifactId>
+                <version>5.5.11</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>itext-xtra</artifactId>
+                <version>5.5.11</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.itextpdf.tool</groupId>
+                <artifactId>xmlworker</artifactId>
+                <version>5.5.11</version>
+            </dependency>
+
+            <!--velocity-->
+            <dependency>
+                <groupId>velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>1.5</version>
             </dependency>
 
         </dependencies>

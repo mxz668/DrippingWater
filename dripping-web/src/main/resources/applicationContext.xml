@@ -10,8 +10,8 @@
     <!--<import resource="spring-aspect.xml"/>
     <import resource="spring-dubbo.xml"/>-->
     <import resource="spring-mybatis.xml"/>
-    <import resource="spring-mns.xml"/>
-    <import resource="spring-ons.xml"/>
+    <!--<import resource="spring-mns.xml"/>
+    <import resource="spring-ons.xml"/>-->
 
 
     <!--开启注解功能 -->
@@ -29,4 +29,7 @@
             </array>
         </property>
     </bean>
+
+    <!--Velocity bean-->
+    <bean id="velocityFactory" class="com.xz.dripping.common.utils.VelocityFactory" init-method="init"/>
 </beans>

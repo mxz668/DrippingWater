@@ -29,6 +29,23 @@
             <artifactId>dripping.facade</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!--Mysql-->
         <dependency>
             <groupId>mysql</groupId>
@@ -102,12 +119,23 @@
 
         <dependency>
             <groupId>com.itextpdf</groupId>
-            <artifactId>itext-asian</artifactId>
+            <artifactId>itext-pdfa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itext-xtra</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.itextpdf.tool</groupId>
             <artifactId>xmlworker</artifactId>
+        </dependency>
+
+        <!--velocity-->
+        <dependency>
+            <groupId>velocity</groupId>
+            <artifactId>velocity</artifactId>
         </dependency>
 
         <!--junit-->
