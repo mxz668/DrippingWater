@@ -201,21 +201,23 @@ public class CreatePdfTest {
             /* 设置图片的大小 */
             tImgCover.scaleAbsolute(600, 130);
             document.add(tImgCover);
-            String str = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">" +
-                    "<html>\n" +
+            String str = "<html>\n" +
                     "<head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head>\n" +
                     "<body>\n" +
                     "<p>\n" +
-                    "    <span style=\"font-family: MS Mincho; font-size: 20px; background-color: rgb(255, 255, 255);\">姓名：${name}</span>\n" +
+                    "    <span style=\"font-family: 微软雅黑; font-size: 20px; background-color: rgb(255, 255, 255);\">姓名：${name}</span>\n" +
                     "</p>\n" +
                     "<p>\n" +
-                    "    <span style=\"font-family: 宋体; font-size: 14px; lightyellow;color:red;\">年龄：${age}</span>\n" +
+                    "    <span style=\"font-family: 微软雅黑; font-size: 14px; lightyellow;color:red;\">年龄：${age}</span>\n" +
                     "</p>\n" +
                     "<p>\n" +
-                    "    <span style=\"font-family: MS Mincho; font-size: 14px;background-color: lightblue;\">也有另一种方法就是直接在</span>\n" +
+                    "    <span style=\"font-family: 微软雅黑; font-size: 14px;background-color: lightblue;\">也有另一种方法就是直接在</span>\n" +
                     "</p>\n" +
-                    "<p style=\"text-align:right;\">\n" +
+                    "<p style=\"text-align:right;margin-top:200px;\">\n" +
                     "    <span style=\"font-family: 微软雅黑; font-size: 14px; background-color: lightgreen;\">日期：${now}</span>\n" +
+                    "</p>\n" +
+                    "<p>\n" +
+                    "    <span style=\"font-family: 微软雅黑; margin-top:10000px;background-color: lightblue;\">也有另一种方法就是直接在</span>\n" +
                     "</p>\n" +
                     "</body>\n" +
                     "</html>";
@@ -231,7 +233,10 @@ public class CreatePdfTest {
             String toPdf = stringWriter.toString();
             InputStream is = new ByteArrayInputStream(toPdf.getBytes("UTF-8"));
 //            XMLWorkerHelper worker = XMLWorkerHelper.getInstance();
-//            worker.parseXHtml(writer, document, is, Charset.forName("UTF-8"),new MyFont());
+//            worker.parseXHtml(writer, document, is, Charset.forName("UTF-8"),new MyFont());//中文显示，部分字体不支持
+
+//            XMLWorkerHelper worker = XMLWorkerHelper.getInstance();
+//            worker.parseXHtml(writer, document, is, Charset.forName("UTF-8"));//部分中文不支持
             String FONT = "D:\\Workspaces\\Main\\DrippingWater\\dripping-web\\src\\test\\resources\\fonts\\FreeSans.ttf";
             XMLWorkerFontProvider fontImp = new XMLWorkerFontProvider(XMLWorkerFontProvider.DONTLOOKFORFONTS);
             fontImp.register(FONT);

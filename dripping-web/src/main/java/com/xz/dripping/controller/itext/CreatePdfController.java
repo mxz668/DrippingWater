@@ -4,6 +4,7 @@ import com.aliyun.mns.common.utils.DateUtil;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.tool.xml.XMLWorkerFontProvider;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 import com.xz.dripping.common.utils.DateUtils;
 import com.xz.dripping.common.utils.VelocityFactory;
@@ -48,13 +49,13 @@ public class CreatePdfController {
                     "<head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head>\n" +
                     "<body background-img=\"http://bpic.588ku.com/back_pic/00/02/34/8356167c25bc7e6.jpg\">\n" +
                     "<p>\n" +
-                    "    <span style=\"font-family: MS Mincho; font-size: 20px; background-color: rgb(255, 255, 255);\">姓名：${name}</span>\n" +
+                    "    <span style=\"font-family: 微软雅黑; font-size: 20px; background-color: rgb(255, 255, 255);\">姓名：${name}</span>\n" +
                     "</p>\n" +
                     "<p>\n" +
-                    "    <span style=\"font-family: 宋体; font-size: 14px; lightyellow;\">年龄：${age}</span>\n" +
+                    "    <span style=\"font-family: 微软雅黑; font-size: 14px; lightyellow;\">年龄：${age}</span>\n" +
                     "</p>\n" +
                     "<p>\n" +
-                    "    <span style=\"font-family: MS Mincho; font-size: 14px;background-color: lightblue;\">也有另一种方法就是直接在</span>\n" +
+                    "    <span style=\"font-family: 微软雅黑; font-size: 14px;background-color: lightblue;\">也有另一种方法就是直接在</span>\n" +
                     "</p>\n" +
                     "<p style=\"text-align:right;\">\n" +
                     "    <span style=\"font-family: 微软雅黑; font-size: 14px; background-color: lightgreen;\">日期：${now}</span>\n" +
@@ -72,8 +73,15 @@ public class CreatePdfController {
 //            document.add(new Paragraph(stringWriter.toString(), font));
             String toPdf = stringWriter.toString();
             InputStream is = new ByteArrayInputStream(toPdf.getBytes("UTF-8"));
-            XMLWorkerHelper worker = XMLWorkerHelper.getInstance();
-            worker.parseXHtml(writer, document, is, Charset.forName("UTF-8"));
+//            XMLWorkerHelper worker = XMLWorkerHelper.getInstance();
+//            worker.parseXHtml(writer, document, is, Charset.forName("UTF-8"));//部分中文不支持
+
+            String path = this.getClass().getClassLoader().getResource("/").getPath();
+            String FONT = path + "/fonts/FreeSans.ttf";
+            XMLWorkerFontProvider fontImp = new XMLWorkerFontProvider(XMLWorkerFontProvider.DONTLOOKFORFONTS);
+            fontImp.register(FONT);
+            XMLWorkerHelper.getInstance().parseXHtml(writer, document,
+                    is, null, Charset.forName("UTF-8"), fontImp);//部分中文字体不支持
             document.close();
             os.flush();
             os.close();
