@@ -24,34 +24,29 @@ public class PoiController {
     @RequestMapping(value = "createWord", method = RequestMethod.GET)
     public void createWord(HttpServletRequest request,HttpServletResponse response) {
         try{
-            XwpfTUtil xwpfTUtil = new XwpfTUtil();
+            XwpfUtil xwpfTUtil = new XwpfUtil();
 
             XWPFDocument doc;
-//            String fileResource = "D:\\Workspaces\\Main\\DrippingWater\\dripping-web\\src\\main\\resources\\temps\\test.docx";
-            InputStream is;
-//            is = new FileInputStream(fileResource);
-            is = getClass().getClassLoader().getResourceAsStream("temps\\test.docx");
+            InputStream is = getClass().getClassLoader().getResourceAsStream("temps\\test.docx");
             doc = new XWPFDocument(is);
 
             Map<String,Object> params = new HashMap<String,Object>();
             params.put("${legalName}","贺超宇");
+            params.put("${age}","25");
             params.put("${companyName}","云南汇百金经贸有限公司");
             params.put("${date}", DateUtils.format(new Date(), "yyyy年MM月dd日"));
 
-            //替换参数
-            xwpfTUtil.replaceInPara(doc, params);
-            //替换表格里面的变量
-//            xwpfTUtil.replaceInTable(doc, params);
-//            OutputStream os = new FileOutputStream("C://poi.docx");
+            //替换段落里的参数
+            XwpfUtil.replaceInPara(doc, params);
+            //替换表格里的参数
+            XwpfUtil.replaceInTable(doc, params);
             OutputStream os = response.getOutputStream();
 
             response.setContentType("application/vnd.ms-excel");
             response.setHeader("Content-disposition","attachment;filename="+"123"+".docx");
 
             doc.write(os);
-
-            xwpfTUtil.close(os);
-            xwpfTUtil.close(is);
+            is.close();
 
             os.flush();
             os.close();
