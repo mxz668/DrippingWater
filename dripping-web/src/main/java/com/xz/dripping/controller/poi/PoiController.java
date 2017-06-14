@@ -24,8 +24,6 @@ public class PoiController {
     @RequestMapping(value = "createWord", method = RequestMethod.GET)
     public void createWord(HttpServletRequest request,HttpServletResponse response) {
         try{
-            XwpfUtil xwpfTUtil = new XwpfUtil();
-
             XWPFDocument doc;
             InputStream is = getClass().getClassLoader().getResourceAsStream("temps\\test.docx");
             doc = new XWPFDocument(is);
@@ -51,7 +49,7 @@ public class PoiController {
             os.flush();
             os.close();
         }catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 }

@@ -2,7 +2,6 @@ package com.xz.dripping.controller.poi;
 
 import com.xz.dripping.common.utils.DateUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -34,8 +33,9 @@ public class PoiTest {
         params.put("${companyName}","云南汇百金经贸有限公司");
         params.put("${date}", DateUtils.format(new Date(), "yyyy年MM月dd日"));
 
+        //替换段落里的参数
         XwpfUtil.replaceInPara(doc, params);
-        //替换表格里面的变量
+        //替换表格里的参数
         XwpfUtil.replaceInTable(doc, params);
         OutputStream os = new FileOutputStream("C://poi.docx");
 
@@ -50,7 +50,7 @@ public class PoiTest {
         try{
             new PoiTest().createWord();
         }catch (Exception e){
-
+            e.printStackTrace();
         }
 
     }
