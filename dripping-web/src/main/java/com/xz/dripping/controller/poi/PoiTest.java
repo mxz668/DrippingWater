@@ -1,14 +1,16 @@
 package com.xz.dripping.controller.poi;
 
 import com.xz.dripping.common.utils.DateUtils;
+import org.apache.poi.poifs.filesystem.DirectoryEntry;
+import org.apache.poi.poifs.filesystem.DocumentEntry;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+
+import java.io.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.ZipOutputStream;
 
 /**
  * POI 操作office
@@ -22,33 +24,76 @@ public class PoiTest {
      */
     public void createWord() throws Exception{
 
-        XWPFDocument doc;
-        String fileResource = "D:\\Workspaces\\Main\\DrippingWater\\dripping-web\\src\\main\\resources\\temps\\test.docx";
-        InputStream is = new FileInputStream(fileResource);
-        doc = new XWPFDocument(is);
+        ZipOutputStream out = new ZipOutputStream(new FileOutputStream("C://ws.zip"));
 
-        Map<String,Object> params = new HashMap<String,Object>();
-        params.put("${legalName}","贺超宇");
-        params.put("${age}","25");
-        params.put("${companyName}","云南汇百金经贸有限公司");
-        params.put("${date}", DateUtils.format(new Date(), "yyyy年MM月dd日"));
+        for (int i=0;i < 3;i++){
+            XWPFDocument doc;
+            String fileResource = "D:\\Workspaces\\Main\\DrippingWater\\dripping-web\\src\\main\\resources\\temps\\test.docx";
+            InputStream is = new FileInputStream(fileResource);
+            doc = new XWPFDocument(is);
 
-        //替换段落里的参数
-        XwpfUtil.replaceInPara(doc, params);
-        //替换表格里的参数
-        XwpfUtil.replaceInTable(doc, params);
-        OutputStream os = new FileOutputStream("C://poi.docx");
+            Map<String,Object> params = new HashMap<String,Object>();
+            params.put("${legalName}","贺超宇");
+            params.put("${age}","25");
+            params.put("${companyName}","云南汇百金经贸有限公司");
+            params.put("${date}", DateUtils.format(new Date(), "yyyy年MM月dd日"));
 
-        doc.write(os);
-        is.close();
+            //替换段落里的参数
+            XwpfUtil.replaceInPara(doc, params);
+            //替换表格里的参数
+            XwpfUtil.replaceInTable(doc, params);
+            OutputStream os = new FileOutputStream("C://poi.docx");
 
-        os.flush();
-        os.close();
+            doc.write(os);
+            is.close();
+
+            os.flush();
+            os.close();
+        }
+    }
+
+    public void html2Word(){
+        String str = "<html>" +
+                "<head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /></head>\n" +
+                "<body>\n" +
+                "<p>\n" +
+                "    <span style=\"font-family: 微软雅黑; font-size: 20px; background-color: rgb(255, 255, 255);\">姓名：${name}</span>\n" +
+                "</p>\n" +
+                "<p>\n" +
+                "    <span style=\"font-family: 微软雅黑; font-size: 14px; lightyellow;color:red;\">年龄：${age}</span>\n" +
+                "</p>\n" +
+                "<p>\n" +
+                "    <span style=\"font-family: 微软雅黑; font-size: 14px;background-color: lightblue;\">也有另一种方法就是直接在</span>\n" +
+                "</p>\n" +
+                "<p style=\"text-align:right;margin-top:200px;\">\n" +
+                "    <span style=\"font-family: 微软雅黑; font-size: 14px; background-color: lightgreen;\">日期：${now}</span>\n" +
+                "</p>\n" +
+                "<p>\n" +
+                "    <span style=\"font-family: 微软雅黑; margin-top:10000px;background-color: lightblue;\">也有另一种方法就是直接在</span>\n" +
+                "</p>\n" +
+                "</body>\n" +
+                "</html>";
+
+        byte b[] = str.getBytes();
+        try{
+            ByteArrayInputStream bais = new ByteArrayInputStream(b);
+            POIFSFileSystem poifs = new POIFSFileSystem();
+            DirectoryEntry directory = poifs.getRoot();
+            DocumentEntry documentEntry = directory.createDocument("WordDocument", bais);
+            FileOutputStream ostream = new FileOutputStream("C://html2word.doc");
+            poifs.writeFilesystem(ostream);
+            bais.close();
+            ostream.close();
+        }catch (Exception e){
+
+        }
+
     }
 
     public static void main(String args[]){
         try{
-            new PoiTest().createWord();
+//            new PoiTest().createWord();
+            new PoiTest().html2Word();
         }catch (Exception e){
             e.printStackTrace();
         }
