@@ -171,6 +171,17 @@
             <groupId>velocity</groupId>
             <artifactId>velocity</artifactId>
         </dependency>
+
+        <!-- OSS start -->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+        </dependency>
+        <!-- OSS end -->
     </dependencies>
 
 </project>

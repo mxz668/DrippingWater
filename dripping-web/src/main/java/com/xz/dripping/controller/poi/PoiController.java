@@ -1,6 +1,7 @@
 package com.xz.dripping.controller.poi;
 
 import com.xz.dripping.common.utils.DateUtils;
+import com.xz.dripping.common.utils.OssFileUtil;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +28,7 @@ public class PoiController {
     public void createWord(HttpServletRequest request,HttpServletResponse response) {
         try{
             XWPFDocument doc;
-            InputStream is = getClass().getClassLoader().getResourceAsStream("temps\\test.docx");
+            InputStream is = OssFileUtil.readFileStream("word-temp.docx");
             doc = new XWPFDocument(is);
 
             Map<String,Object> params = new HashMap<String,Object>();
@@ -65,12 +66,11 @@ public class PoiController {
         OutputStream out = response.getOutputStream();
         ZipOutputStream zipOut = new ZipOutputStream(out);
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-disposition","attachment;filename="+"123"+".zip");
+        response.setHeader("Content-disposition", "attachment;filename=" + "123" + ".zip");
 
         for (int i=0;i < 3;i++){
             XWPFDocument doc;
-            String fileResource = "D:\\Workspaces\\Main\\DrippingWater\\dripping-web\\src\\main\\resources\\temps\\test.docx";
-            InputStream is = new FileInputStream(fileResource);
+            InputStream is = OssFileUtil.readFileStream("word-temp.docx");
             doc = new XWPFDocument(is);
 
             Map<String,Object> params = new HashMap<String,Object>();
