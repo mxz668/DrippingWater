@@ -7,9 +7,11 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -19,12 +21,43 @@ import java.util.zip.ZipOutputStream;
 public class PoiTest {
 
     /**
-     * 替换word指定参数
+     * 替换word指定参数并生成word文档
      * @throws Exception
      */
     public void createWord() throws Exception{
 
-        ZipOutputStream out = new ZipOutputStream(new FileOutputStream("C://ws.zip"));
+        XWPFDocument doc;
+        String fileResource = "D:\\Workspaces\\Main\\DrippingWater\\dripping-web\\src\\main\\resources\\temps\\test.docx";
+        InputStream is = new FileInputStream(fileResource);
+        doc = new XWPFDocument(is);
+
+        Map<String,Object> params = new HashMap<String,Object>();
+        params.put("${legalName}","贺超宇");
+        params.put("${age}","25");
+        params.put("${companyName}","云南汇百金经贸有限公司");
+        params.put("${date}", DateUtils.format(new Date(), "yyyy年MM月dd日"));
+
+        //替换段落里的参数
+        XwpfUtil.replaceInPara(doc, params);
+        //替换表格里的参数
+        XwpfUtil.replaceInTable(doc, params);
+        OutputStream os = new FileOutputStream("C://poi.docx");
+        doc.write(os);
+        is.close();
+
+        os.flush();
+        os.close();
+        is.close();
+    }
+
+    /**
+     * 替换word指定参数并压缩多个word文档成Zip
+     * @throws Exception
+     */
+    public void createWord2Zip() throws Exception{
+
+        OutputStream out = new FileOutputStream("C://words.zip");
+        ZipOutputStream zipOut = new ZipOutputStream(out);
 
         for (int i=0;i < 3;i++){
             XWPFDocument doc;
@@ -42,14 +75,26 @@ public class PoiTest {
             XwpfUtil.replaceInPara(doc, params);
             //替换表格里的参数
             XwpfUtil.replaceInTable(doc, params);
-            OutputStream os = new FileOutputStream("C://poi.docx");
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            doc.write(outputStream);
 
-            doc.write(os);
+            ZipEntry entry = new ZipEntry(getFileName()+ ".docx");
+            zipOut.putNextEntry(entry);
+            zipOut.write(outputStream.toByteArray());
+
             is.close();
-
-            os.flush();
-            os.close();
         }
+        zipOut.flush();
+        zipOut.close();
+    }
+
+    //获取文件名字
+    public static String getFileName(){
+        // 文件名获取
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-HHmmss");
+        String f = format.format(date);
+        return f;
     }
 
     public void html2Word(){
@@ -92,8 +137,8 @@ public class PoiTest {
 
     public static void main(String args[]){
         try{
-//            new PoiTest().createWord();
-            new PoiTest().html2Word();
+            new PoiTest().createWord();
+//            new PoiTest().html2Word();
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -23,8 +23,7 @@ import org.apache.poi.ss.usermodel.Workbook;
  */
 public class ExportToExcelUtil<T> {
     //每次设置导出数量
-    public static int  NUM=5000;
-    public static String title="";
+    public static String title="12";
 
     /**
      * 导出Excel的方法
@@ -32,14 +31,9 @@ public class ExportToExcelUtil<T> {
      */
     public void exportExcel() throws Exception{
         OutputStream out = new FileOutputStream("C://ws2.zip");
-        File zip = new File("C://ws.zip");// 压缩文件
+        ZipOutputStream zipOutputStream = new ZipOutputStream(out);
 
-        int n=2;
-
-        List<String> fileNames = new ArrayList();// 用于存放生成的文件名称s
-        //文件流用于转存文件
-
-        for (int j = 0; j < n; j++) {
+        for (int j = 0; j < 2; j++) {
             // 声明一个工作薄
             Workbook workbook = new HSSFWorkbook();
             // 生成一个表格
@@ -47,26 +41,12 @@ public class ExportToExcelUtil<T> {
             // 设置表格默认列宽度为18个字节
             sheet.setDefaultColumnWidth((short)18);
 
-
-            String file = "C://" +j+ ".xls";
-            fileNames.add(file);
-
-            FileOutputStream o = new FileOutputStream(file);
-
-            workbook.write(o);
-            File srcfile[] = new File[fileNames.size()];
-            for (int i = 0, n1 = fileNames.size(); i < n1; i++) {
-                srcfile[i] = new File(fileNames.get(i));
-            }
-            ZipFiles(srcfile, zip);
-            FileInputStream inStream = new FileInputStream(zip);
-            byte[] buf = new byte[4096];
-            int readLength;
-            while (((readLength = inStream.read(buf)) != -1)) {
-                out.write(buf, 0, readLength);
-            }
-            inStream.close();
+            ZipEntry entry = new ZipEntry("name" + j + ".xls");
+            zipOutputStream.putNextEntry(entry);
+            workbook.write(zipOutputStream);
         }
+        zipOutputStream.flush();
+        zipOutputStream.close();
     }
     //获取文件名字
     public static String getFileName(){
@@ -75,27 +55,6 @@ public class ExportToExcelUtil<T> {
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
         String f = title + format.format(date);
         return f;
-    }
-    //压缩文件
-    public static void ZipFiles(java.io.File[] srcfile, java.io.File zipfile) {
-        byte[] buf = new byte[1024];
-        try {
-            ZipOutputStream out = new ZipOutputStream(new FileOutputStream(
-                    zipfile));
-            for (int i = 0; i < srcfile.length; i++) {
-                FileInputStream in = new FileInputStream(srcfile[i]);
-                out.putNextEntry(new ZipEntry(srcfile[i].getName()));
-                int len;
-                while ((len = in.read(buf)) > 0) {
-                    out.write(buf, 0, len);
-                }
-                out.closeEntry();
-                in.close();
-            }
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public static void main(String args[]){

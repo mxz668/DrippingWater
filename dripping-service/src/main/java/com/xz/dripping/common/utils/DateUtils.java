@@ -11,9 +11,6 @@ import java.util.Date;
 
 /**
  * 功能: 日期工具类
- * 创建: liuchongguang
- * 日期: 2016/12/27 0027 19:03
- * 版本: V1.0
  */
 public class DateUtils {
 
