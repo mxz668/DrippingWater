@@ -49,23 +49,11 @@
                selectByExampleQueryId="false">
         </table>
 
-        <table tableName="ams_file_template" domainObjectName="FileTemplate"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
-        <table tableName="ams_file_template_param" domainObjectName="FileTemplateParam"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
-        <table tableName="ams_issue_plan" domainObjectName="IssuePlan"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
+        <!--<table tableName="ams_finance_subject" domainObjectName="FinanceSubject"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+        <!--</table>-->
 
     </context>
 </generatorConfiguration>
