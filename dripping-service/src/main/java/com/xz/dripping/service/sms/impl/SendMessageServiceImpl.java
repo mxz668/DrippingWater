@@ -21,10 +21,13 @@ import org.springframework.stereotype.Service;
 public class SendMessageServiceImpl implements SendMessageService {
 
 //    @Autowired
-    private CloudAccountFactory cloudAccountFactory;
+    private CloudAccountFactory cloudAccountFactory = new CloudAccountFactory();
 
     @Override
     public String sendMessage(SendMessageRequest req) throws Exception {
+        cloudAccountFactory.setAccessId("LTAIHCgkz0SQn4c9");
+        cloudAccountFactory.setAccessKey("G8I2BpLp9iC5Wx0J6nlmrvkjacqAKt");
+        cloudAccountFactory.setAccountEndpoint("http://1616880989457655.mns.cn-hangzhou.aliyuncs.com/");
         MNSClient mnsClient = cloudAccountFactory.getMNSClient();
         CloudTopic topic = mnsClient.getTopicRef("sms.topic-cn-hangzhou");
 

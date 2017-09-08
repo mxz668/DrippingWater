@@ -1,7 +1,7 @@
 package com.xz.dripping.facade.impl;
 
 import com.xz.dripping.facade.service.TestFacade;
-import com.xz.dripping.service.TestService;
+import com.xz.dripping.service.mycat.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ public class TestFacadeImpl implements TestFacade {
 
     public String saveTest(){
         try {
-            testService.saveTest();
+            testService.saveTest(null);
         }catch (Exception e){
 
         }

@@ -1,6 +1,12 @@
-package com.xz.dripping.dal.entity;
+package com.xz.dripping.facade.dto.req.mycat;
 
-public class Test {
+import com.xz.dripping.common.dto.BaseRequest;
+
+/**
+ * Created by MABIAO on 2017/9/5.
+ */
+public class TestRequest extends BaseRequest {
+
     private Long id;
 
     private String name;

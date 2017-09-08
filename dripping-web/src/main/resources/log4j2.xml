@@ -4,7 +4,7 @@
 
     <Properties>
         <!-- 配置日志文件输出目录 -->
-        <Property name="log.path">/var/logs/mvn</Property>
+        <Property name="log.path">/var/logs/drip</Property>
         <property name="log.pattern">%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L) - %m%n</property>
     </Properties>
 
@@ -19,8 +19,8 @@
         </Console>
 
         <!-- 输出到文件，按天或者超过80MB分割 -->
-        <RollingFile name="MvnAllRollingFile" fileName="${log.path}/mvn.log"
-                     filePattern="${log.path}/mvn-%d{yyyy-MM-dd}.log">
+        <RollingFile name="MvnAllRollingFile" fileName="${log.path}/drip.log"
+                     filePattern="${log.path}/drip-%d{yyyy-MM-dd}.log">
             <!-- 需要记录的级别 -->
             <!--<ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>-->
             <PatternLayout pattern="${log.pattern}"/>
@@ -29,8 +29,8 @@
             </Policies>
         </RollingFile>
 
-        <RollingFile name="MvnErrorRollingFile" fileName="${log.path}/mvn-error.log"
-                     filePattern="${log.path}/mvn-error-%d{yyyy-MM-dd}.log">
+        <RollingFile name="MvnErrorRollingFile" fileName="${log.path}/drip-error.log"
+                     filePattern="${log.path}/drip-error-%d{yyyy-MM-dd}.log">
             <!-- 需要记录的级别 -->
             <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${log.pattern}"/>
@@ -40,8 +40,8 @@
         </RollingFile>
 
         <!-- 输出到文件，按天或者超过80MB分割 -->
-        <RollingFile name="MvnSQLRollingFile" fileName="${log.path}/mvn-sql.log"
-                     filePattern="${log.path}/mvn-sql-%d{yyyy-MM-dd}.log">
+        <RollingFile name="MvnSQLRollingFile" fileName="${log.path}/drip-sql.log"
+                     filePattern="${log.path}/drip-sql-%d{yyyy-MM-dd}.log">
             <!-- 需要记录的级别 -->
             <!--<ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>-->
             <PatternLayout pattern="${log.pattern}"/>
@@ -51,8 +51,8 @@
         </RollingFile>
 
         <!-- 输出到文件，按天或者超过80MB分割 -->
-        <RollingFile name="MvnSpringRollingFile" fileName="${log.path}/mvn-spring.log"
-                     filePattern="${log.path}/mvn-spring-%d{yyyy-MM-dd}.log">
+        <RollingFile name="MvnSpringRollingFile" fileName="${log.path}/drip-spring.log"
+                     filePattern="${log.path}/drip-spring-%d{yyyy-MM-dd}.log">
             <!-- 需要记录的级别 -->
             <!-- <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY" /> -->
             <PatternLayout pattern="${log.pattern}"/>
