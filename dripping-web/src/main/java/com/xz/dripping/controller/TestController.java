@@ -28,4 +28,23 @@ public class TestController {
             logger.info("创建失败");
         }
     }
+
+    public static void main(String args[]){
+        while (true){
+            int j = 0;
+
+            for(int i=0; i < 5;i++){
+                System.out.println(i);
+                if(i == 3){
+                    j = i;
+                    break;
+                }
+            }
+
+            if(j == 3){
+                break;
+            }
+        }
+        System.out.println("567");
+    }
 }
