@@ -1,5 +1,6 @@
 package com.xz.dripping.controller;
 
+import com.xz.dripping.common.utils.DateUtils;
 import com.xz.dripping.facade.service.TestFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,21 +31,7 @@ public class TestController {
     }
 
     public static void main(String args[]){
-        while (true){
-            int j = 0;
-
-            for(int i=0; i < 5;i++){
-                System.out.println(i);
-                if(i == 3){
-                    j = i;
-                    break;
-                }
-            }
-
-            if(j == 3){
-                break;
-            }
-        }
-        System.out.println("567");
+        String yearMonth = DateUtils.format(DateUtils.now(), DateUtils.DATE_FORMAT_YYMMDD);
+        System.out.println(yearMonth);
     }
 }
