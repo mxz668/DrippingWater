@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
  * Created by MABIAO on 2017/6/2 0002.
  */
@@ -31,7 +34,12 @@ public class TestController {
     }
 
     public static void main(String args[]){
-        String yearMonth = DateUtils.format(DateUtils.now(), DateUtils.DATE_FORMAT_YYMMDD);
-        System.out.println(yearMonth);
+//        String yearMonth = DateUtils.format(DateUtils.now(), DateUtils.DATE_FORMAT_YYMMDD);
+//        Date d = DateUtils.parse("20170920", DateUtils.DATE_FORMAT_YYMMDD);\
+//        String string = "AXD";
+//        System.out.println(String.format("%0" + 5 + "d",2000000l));
+
+        BigDecimal b = new BigDecimal("127867564.12");
+        System.out.println(b.setScale(0,BigDecimal.ROUND_DOWN));
     }
 }
