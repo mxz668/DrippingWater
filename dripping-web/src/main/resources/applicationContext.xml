@@ -31,6 +31,6 @@
     </bean>
 
     <!--Velocity bean-->
-    <!--<bean id="velocityFactory" class="com.xz.dripping.common.utils.VelocityFactory" init-method="init"/>-->
+    <bean id="velocityFactory" class="com.xz.dripping.common.utils.VelocityFactory" init-method="init"/>
 
 </beans>
