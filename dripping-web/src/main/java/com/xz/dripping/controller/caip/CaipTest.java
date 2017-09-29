@@ -32,7 +32,6 @@ public class CaipTest {
             }
             if (flag) {
                 red.set(i, rednum);
-                System.out.println(rednum);
             }
         }
         Collections.sort(red);
