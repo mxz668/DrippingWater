@@ -10,6 +10,8 @@ public class Pool {
 
     private BigDecimal totalAmount;
 
+    private Long version;
+
     private Date createTime;
 
     public Long getId() {
@@ -42,5 +44,13 @@ public class Pool {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 }

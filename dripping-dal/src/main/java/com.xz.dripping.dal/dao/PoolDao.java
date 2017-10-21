@@ -15,4 +15,6 @@ public interface PoolDao {
     int updateByPrimaryKeySelective(Pool record);
 
     int updateByPrimaryKey(Pool record);
+
+    int updateByPrimaryForLock(Pool record);
 }

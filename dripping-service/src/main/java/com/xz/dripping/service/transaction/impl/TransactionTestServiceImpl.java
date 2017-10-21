@@ -36,7 +36,7 @@ public class TransactionTestServiceImpl implements TransactionTestService {
             Pool newPool = poolDao.selectByPrimaryKey(pool.getId());
             newPool.setTotalAmount(newPool.getTotalAmount().add(pool.getTotalAmount()));
 
-            poolDao.updateByPrimaryKeySelective(newPool);
+            poolDao.updateByPrimaryForLock(newPool);
         }
 
         return null;
