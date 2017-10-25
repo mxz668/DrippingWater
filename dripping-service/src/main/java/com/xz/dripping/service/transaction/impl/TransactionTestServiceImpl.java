@@ -41,4 +41,11 @@ public class TransactionTestServiceImpl implements TransactionTestService {
 
         return null;
     }
+
+    public static void main(String args[]){
+
+        System.setProperty("p", "1");
+
+        System.out.println(args);
+    }
 }
