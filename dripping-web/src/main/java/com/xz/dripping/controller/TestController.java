@@ -1,10 +1,12 @@
 package com.xz.dripping.controller;
 
 import com.xz.dripping.common.utils.DateUtils;
+import com.xz.dripping.facade.dto.req.vue.SendVueRequest;
 import com.xz.dripping.facade.service.TestFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,11 +27,17 @@ public class TestController {
     private TestFacade testFacade;
 
     @RequestMapping(value = "saveTest",method = RequestMethod.POST)
-    public void saveTest(){
+    public String saveTest(@RequestBody SendVueRequest request){
         try {
-            testFacade.saveTest();
+//            testFacade.saveTest();
+            System.out.println("Vue 请求");
+            System.out.println("PoolCode:" + request.getPoolCode());
+            System.out.println("ProductCode:" + request.getProductCode());
+
+            return "success";
         }catch (Exception e){
             logger.info("创建失败");
+            return "false";
         }
     }
 

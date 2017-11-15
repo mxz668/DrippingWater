@@ -16,7 +16,7 @@ public class User implements Runnable {
         int tempMoney = 100;
         account.load("ren", tempMoney);
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
