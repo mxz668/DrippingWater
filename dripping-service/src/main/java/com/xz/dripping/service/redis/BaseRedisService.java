@@ -11,7 +11,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
  */   
 public abstract class BaseRedisService<K, V> {
       
-    @Autowired
+//    @Autowired
     protected RedisTemplate<K, V> redisTemplate;  
     
 
