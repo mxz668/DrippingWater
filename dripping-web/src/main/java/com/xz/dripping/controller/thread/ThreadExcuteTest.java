@@ -10,7 +10,14 @@ import java.util.concurrent.ScheduledExecutorService;
 public class ThreadExcuteTest {
 
     public static void main(String args[]){
-        ScheduledExecutorService executor = null;
-        new ThreadExecutorFactory();
+//        ScheduledExecutorService executor = null;
+//        new ThreadExecutorFactory();
+
+        try{
+            throw new Exception();
+        }catch (Exception e){
+            System.out.println("12");
+        }
+        System.out.println("123");
     }
 }
