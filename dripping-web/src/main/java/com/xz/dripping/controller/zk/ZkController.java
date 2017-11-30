@@ -26,7 +26,7 @@ public class ZkController {
 
     @PostConstruct
     public void init() {
-        sequenceHandler = ZKIncreaseSequenceHandler.getInstance("192.168.0.65", "/sequence/asset", "seq");
+        sequenceHandler = ZKIncreaseSequenceHandler.getInstance("127.0.0.1", "/sequence/asset", "seq");
     }
 
     @RequestMapping(value = "/generate",method = RequestMethod.POST)

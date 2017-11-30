@@ -2,6 +2,8 @@ package com.xz.dripping.controller.thread;
 
 import org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
 
 /**
@@ -13,11 +15,15 @@ public class ThreadExcuteTest {
 //        ScheduledExecutorService executor = null;
 //        new ThreadExecutorFactory();
 
-        try{
-            throw new Exception();
-        }catch (Exception e){
-            System.out.println("12");
-        }
-        System.out.println("123");
+//        try{
+//            throw new Exception();
+//        }catch (Exception e){
+//            System.out.println("12");
+//        }
+//        System.out.println("123");
+
+        Set<String> set = new HashSet<>();
+        set.add("1");
+        set.remove("2");
     }
 }

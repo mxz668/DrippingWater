@@ -32,8 +32,8 @@ public class ZKIncreaseSequenceHandler extends SequenceHandler implements Pooled
     private GenericObjectPool genericObjectPool;
     private static final Map<String, Queue<Long>> preNodeMap = new HashMap<>();
     private static final Set<Long> ymdNodeSet = new HashSet<>();
-    private static String ZK_ADDRESS = ""; //192.168.0.65
-    private static String PATH = "";//  /sequence/p2p
+    private static String ZK_ADDRESS = "";//192.168.0.65
+    private static String PATH = "";//sequence/p2p
     private static String SEQ = "";//seq;
 
     /**
@@ -134,64 +134,59 @@ public class ZKIncreaseSequenceHandler extends SequenceHandler implements Pooled
         final long nowYmd = Long.parseLong(ymd);
         ymdNodeSet.add(nowYmd);
 
-
         //删除上一个节点
         fixedThreadPool.execute(new Runnable() {
             @Override
             public void run() {
+                CuratorFramework client = null;
+                try {
+                    client = (CuratorFramework) genericObjectPool.borrowObject();
+                    Iterator<Long> iterator = preNodeQueue.iterator();
+                    if (iterator.hasNext()) {
+                        long preNode = iterator.next();
+                        if (preNode < id) {
+                            final String format = "%0" + idstr.length() + "d";
+                            String preIdstr = String.format(format, preNode);
+                            final String prePath = PATH + "/" + sequenceEnum.getCode() + "/" + ymd + "/" + SEQ + preIdstr;
+                            try {
+                                Stat stat = client.checkExists().forPath(prePath);
+                                if(null != stat){
+                                    client.delete().forPath(prePath);
+                                    logger.debug("删除" + prePath);
+                                    preNodeQueue.remove(preNode);
+                                }
 
-                Iterator<Long> iterator = preNodeQueue.iterator();
-                if (iterator.hasNext()) {
-                    long preNode = iterator.next();
-                    if (preNode < id) {
-                        final String format = "%0" + idstr.length() + "d";
-                        String preIdstr = String.format(format, preNode);
-                        final String prePath = PATH + "/" + sequenceEnum.getCode() + "/" + ymd + "/" + SEQ + preIdstr;
-                        CuratorFramework client = null;
-                        try {
-                            client = (CuratorFramework) genericObjectPool.borrowObject();
-                            Stat stat = client.checkExists().forPath(prePath);
-                            if(null != stat){
-                                client.delete().forPath(prePath);
-                                logger.debug("删除" + prePath);
-                                preNodeQueue.remove(preNode);
+                                if(preNodeMap.containsKey(sequenceEnum.getCode() + preNode)){
+                                    preNodeMap.remove(sequenceEnum.getCode() + preNode);
+                                }
+                            } catch (Exception e) {
+                                logger.error("delete preNode error", e);
                             }
-
-                            if(preNodeMap.containsKey(sequenceEnum.getCode() + preNode)){
-                                preNodeMap.remove(sequenceEnum.getCode() + preNode);
-                            }
-                        } catch (Exception e) {
-                            logger.error("delete preNode error", e);
-                        } finally {
-                            if (client != null)
-                                genericObjectPool.returnObject(client);
                         }
                     }
-                }
 
-                Iterator<Long> ymdIterator = ymdNodeSet.iterator();
-                if (ymdIterator.hasNext()) {
-                    long preYmd = ymdIterator.next();
-                    if (preYmd < nowYmd) {
-                        CuratorFramework client = null;
-                        try {
-                            client = (CuratorFramework) genericObjectPool.borrowObject();
-                            final String prePath = PATH + "/" + sequenceEnum.getCode() + "/" + preYmd;
-
-                            Stat stat = client.checkExists().forPath(prePath);
-                            if(null != stat){
-                                client.delete().deletingChildrenIfNeeded().forPath(prePath);
-                                logger.debug("删除" + prePath);
-                                ymdNodeSet.remove(preYmd);
+                    Iterator<Long> ymdIterator = ymdNodeSet.iterator();
+                    if (ymdIterator.hasNext()) {
+                        long preYmd = ymdIterator.next();
+                        if (preYmd < nowYmd) {
+                            try {
+                                final String prePath = PATH + "/" + sequenceEnum.getCode() + "/" + preYmd;
+                                Stat stat = client.checkExists().forPath(prePath);
+                                if(null != stat){
+                                    client.delete().deletingChildrenIfNeeded().forPath(prePath);
+                                    logger.debug("删除" + prePath);
+                                    ymdNodeSet.remove(preYmd);
+                                }
+                            } catch (Exception e) {
+                                logger.error("delete ymdNode error", e);
                             }
-                        } catch (Exception e) {
-                            logger.error("delete ymdNode error", e);
-                        } finally {
-                            if (client != null)
-                                genericObjectPool.returnObject(client);
                         }
-
                     }
+                } catch (Exception e) {
+                    logger.error("delete preNode error", e);
+                } finally {
+                    if (client != null)
+                        genericObjectPool.returnObject(client);
                 }
             }
         });
@@ -214,26 +209,36 @@ public class ZKIncreaseSequenceHandler extends SequenceHandler implements Pooled
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         ExecutorService executorService = Executors.newFixedThreadPool(1);
         long startTime = System.currentTimeMillis();   //获取开始时间--192.168.0.65
         final ZKIncreaseSequenceHandler sequenceHandler = ZKIncreaseSequenceHandler.getInstance("127.0.0.1", "/sequence/asset", "seq");
+//        try{
+//            CuratorFramework client = (CuratorFramework) sequenceHandler.genericObjectPool.borrowObject();
+//            Stat stat = client.checkExists().forPath("/sequence/asset/123");
+//            if(null != stat){
+//                client.delete().forPath("/sequence/asset/123");
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+
         int count = 10;
 
         final CountDownLatch cd = new CountDownLatch(count);
         for (int i = 0; i < count; i++) {
-//            executorService.execute(new Runnable() {
-//                public void run() {
-//                    System.out.printf("线程1 %s %d \n", Thread.currentThread().getId(), sequenceHandler.nextYmdId(SequenceEnum.ASSET_CODE,"20171128"));
-//                    cd.countDown();
-//                }
-//            });
             executorService.execute(new Runnable() {
                 public void run() {
-                    System.out.printf("线程2 %s %d \n", Thread.currentThread().getId(), sequenceHandler.nextId(SequenceEnum.ASSET_CODE));
+                    System.out.printf("线程1 %s %d \n", Thread.currentThread().getId(), sequenceHandler.nextYmdId(SequenceEnum.ASSET_CODE,"20171129"));
                     cd.countDown();
                 }
             });
+//            executorService.execute(new Runnable() {
+//                public void run() {
+//                    System.out.printf("线程2 %s %d \n", Thread.currentThread().getId(), sequenceHandler.nextId(SequenceEnum.ASSET_CODE));
+//                    cd.countDown();
+//                }
+//            });
         }
         try {
             cd.await();

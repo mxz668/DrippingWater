@@ -19,7 +19,7 @@ public abstract class SequenceHandler {
      * 获取按日统计sequence
      * @return
      */
-    public abstract long nextYmdId(final SequenceEnum sequenceEnum,String ymd);
+    public abstract long nextYmdId (final SequenceEnum sequenceEnum,String ymd) throws Exception;
 
 
     /**
