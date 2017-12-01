@@ -34,4 +34,18 @@ public class ZkController {
         long id = sequenceHandler.nextYmdId(SequenceEnum.ASSET_CODE, date);
         System.out.println("id:" + id);
     }
+
+    public static void main(String args[]){
+//        int i = 0;
+//        while (true){
+//            ++i;
+//            System.out.println(i);
+//            if(i == 5){
+//                break;
+//            }
+//        }
+
+        System.out.println(System.currentTimeMillis());
+    }
+
 }

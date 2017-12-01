@@ -41,7 +41,7 @@ public class ZKIncreaseSequenceHandler extends SequenceHandler implements Pooled
      */
     private ZKIncreaseSequenceHandler() {
         GenericObjectPoolConfig config = new GenericObjectPoolConfig();
-        config.setMaxTotal(8);
+        config.setMaxTotal(4);
         genericObjectPool = new GenericObjectPool(this, config);
     }
 
@@ -113,7 +113,7 @@ public class ZKIncreaseSequenceHandler extends SequenceHandler implements Pooled
         try {
             client = (CuratorFramework) genericObjectPool.borrowObject();
             Stat stat = client.checkExists().forPath(PATH + "/" + sequenceEnum.getCode() + "/" + ymd);
-            if(null == stat){
+            if(null == stat){//如果是新的一天，则将前一天的preNodeMap清空
                 Queue<Long> queue = new ConcurrentLinkedQueue<>();
                 preNodeMap.put(sequenceEnum.getCode(), queue);
             }

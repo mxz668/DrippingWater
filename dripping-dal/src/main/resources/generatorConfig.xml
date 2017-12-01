@@ -15,12 +15,12 @@
             <property name="suppressDate" value="true" />
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
-        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
-                        <!--connectionURL="jdbc:mysql://192.168.0.76:3306/ams_batch" userId="root"-->
-                        <!--password="qylc@123" />-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/drip1" userId="root"
-                        password="root" />
+                        connectionURL="jdbc:mysql://192.168.0.76:3306/ams_qjs" userId="root"
+                        password="qylc@123" />
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
+                        <!--connectionURL="jdbc:mysql://127.0.0.1:3306/drip1" userId="root"-->
+                        <!--password="root" />-->
 
         <!-- 指定生成的类型为java类型，避免数据库中number等类型字段 -->
         <javaTypeResolver>
@@ -28,25 +28,22 @@
         </javaTypeResolver>
 
         <!-- 生成model模型，对应的包，存放位置可以指定具体的路径,如/ProjectName/src，也可以使用MAVEN来自动生成 -->
-        <javaModelGenerator targetPackage="com.xz.dripping.dal.entity"
-                            targetProject="MAVEN">
+        <javaModelGenerator targetPackage="com.zb.fincore.ams.service.dal.model" targetProject="MAVEN">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
         <!--对应的xml mapper文件 -->
-        <sqlMapGenerator targetPackage="com.xz.dripping.dal.mapper"
-                         targetProject="MAVEN">
+        <sqlMapGenerator targetPackage="com.zb.fincore.ams.service.dal.mapper" targetProject="MAVEN">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!-- 对应的dao接口 -->
-        <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.xz.dripping.dal.dao" targetProject="MAVEN">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zb.fincore.ams.service.dal.dao" targetProject="MAVEN">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="pool" domainObjectName="Pool"
+        <table tableName="ams_permit_application" domainObjectName="PermitApplication"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
