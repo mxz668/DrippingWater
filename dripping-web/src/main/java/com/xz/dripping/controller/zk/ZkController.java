@@ -1,19 +1,12 @@
 package com.xz.dripping.controller.zk;
 
-import com.xz.dripping.common.utils.DateUtils;
-import com.xz.dripping.common.utils.redis.BusinessCodeUtils;
 import com.xz.dripping.common.utils.zk.SequenceEnum;
 import com.xz.dripping.common.utils.zk.ZKIncreaseSequenceHandler;
-import com.xz.dripping.service.redis.BaseRedisService;
-import com.xz.dripping.service.redis.impl.RedisModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.annotation.PostConstruct;
-import java.util.Date;
 
 /**
  * Created by MABIAO on 2017/9/4.
@@ -45,7 +38,9 @@ public class ZkController {
 //            }
 //        }
 
-        System.out.println(System.currentTimeMillis());
+//        System.out.println(System.currentTimeMillis());
+        String node = String.format("%02d",1l + 1);
+        System.out.println(node);
     }
 
 }

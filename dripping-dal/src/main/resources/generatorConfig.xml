@@ -43,7 +43,7 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="ams_permit_application" domainObjectName="PermitApplication"
+        <table tableName="ams_listed_application" domainObjectName="ListedApplication"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

@@ -2,8 +2,6 @@ package com.xz.dripping.common.utils;
 
 /**
  * 功能: Integer工具类
- * 创建: liuchongguang - liuchongguang@zillionfortune.com
- * 日期: 2017/1/9 0009 11:33
  * 版本: V1.0
  */
 public class IntegerUtils {

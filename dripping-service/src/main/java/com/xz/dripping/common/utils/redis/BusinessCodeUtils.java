@@ -8,9 +8,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * 功能: 业务编码工具类
- * 创建: liuchongguang - liuchongguang@zillionfortune.com
- * 日期: 2017/1/10 0010 14:27
- * 版本: V1.0
  */
 @Component
 public class BusinessCodeUtils {

@@ -14,9 +14,6 @@ import java.util.*;
 /**
  * <p>
  * Description:java bean log工具类<br />
- * </p>
- *
- * @author wangwanbin
  * @version 0.1 2017/1/3
  * @title JsonUtils
  */

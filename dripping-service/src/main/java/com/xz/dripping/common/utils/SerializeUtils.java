@@ -7,9 +7,6 @@ import java.io.*;
 
 /**
  * 功能: 序列化工具类
- * 创建: liuchongguang - liuchongguang@zillionfortune.com
- * 日期: 2017/4/12 0012 16:36
- * 版本: V1.0
  */
 public class SerializeUtils {
 

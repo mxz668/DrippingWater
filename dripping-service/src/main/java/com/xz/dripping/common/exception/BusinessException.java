@@ -2,9 +2,6 @@ package com.xz.dripping.common.exception;
 
 /**
  * 功能: 业务异常类
- * 创建: liuchongguang - liuchongguang@zillionfortune.com
- * 日期: 2017/2/9 0009 09:20
- * 版本: V1.0
  */
 public class BusinessException extends RuntimeException {
 
