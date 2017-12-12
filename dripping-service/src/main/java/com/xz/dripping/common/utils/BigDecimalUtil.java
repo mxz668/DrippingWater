@@ -3,7 +3,6 @@ package com.xz.dripping.common.utils;
 import java.math.BigDecimal;
 
 /**
- * Created by wangwanbin on 2017/3/14.
  * BigDecimal工具类
  */
 public class BigDecimalUtil {
