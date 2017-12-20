@@ -209,6 +209,38 @@ public class ZKIncreaseSequenceHandler extends SequenceHandler implements Pooled
         }
     }
 
+    public String getNodeId(String prefixName) {
+        CuratorFramework client = null;
+        try {
+            client = (CuratorFramework) genericObjectPool.borrowObject();
+
+            String prePath = PATH + "/" + SequenceEnum.ASSET_CODE.getCode() + "/" + "seq0000000017";
+            Stat stat = client.checkExists().forPath(prePath);
+            if(null != stat){
+                int version = stat.getVersion();
+                System.out.println(version);
+                System.out.println(stat.getCversion());
+
+                client.setData().forPath(prePath,"123".getBytes());
+
+                String data = new String(client.getData().forPath(prePath));
+                System.out.println(data);
+
+                System.out.println(stat.getVersion());
+                System.out.println(stat.getCversion());
+//                stat.getCversion();
+//                String result = client.create().creatingParentsIfNeeded().withMode(CreateMode.PERSISTENT_SEQUENTIAL)
+//                        .forPath(PATH + "/" + prefixName + "/" + SEQ, String.valueOf(0).getBytes());
+            }
+            return "";
+        } catch (Exception e) {
+            throw new RuntimeException("create zookeeper node error", e);
+        } finally {
+            if (client != null)
+                genericObjectPool.returnObject(client);
+        }
+    }
+
     public static void main(String[] args) throws Exception{
         ExecutorService executorService = Executors.newFixedThreadPool(1);
         long startTime = System.currentTimeMillis();   //获取开始时间--192.168.0.65

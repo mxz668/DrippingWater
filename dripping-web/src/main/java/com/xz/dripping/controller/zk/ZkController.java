@@ -19,13 +19,14 @@ public class ZkController {
 
     @PostConstruct
     public void init() {
-        sequenceHandler = ZKIncreaseSequenceHandler.getInstance("127.0.0.1", "/sequence/asset", "seq");
+        sequenceHandler = ZKIncreaseSequenceHandler.getInstance("192.168.0.65", "/sequence/asset", "seq");
     }
 
     @RequestMapping(value = "/generate",method = RequestMethod.POST)
     public void generateCode(@RequestBody String date){
-        long id = sequenceHandler.nextYmdId(SequenceEnum.ASSET_CODE, date);
-        System.out.println("id:" + id);
+//        long id = sequenceHandler.nextYmdId(SequenceEnum.ASSET_CODE, date);
+//        System.out.println("id:" + id);
+        sequenceHandler.getNodeId("");
     }
 
     public static void main(String args[]){

@@ -21,6 +21,8 @@ public abstract class SequenceHandler {
      */
     public abstract long nextYmdId (final SequenceEnum sequenceEnum,String ymd) throws Exception;
 
+    public abstract String getNodeId(String prefixName);
+
 
     /**
      * 生成业务编码
