@@ -28,7 +28,7 @@ public class TestController {
     @RequestMapping(value = "saveTest",method = RequestMethod.POST)
     public String saveTest(@RequestBody SendVueRequest request){
         try {
-//            testFacade.saveTest();
+            testFacade.saveTest();
             System.out.println("Vue 请求");
             System.out.println("PoolCode:" + request.getPoolCode());
             System.out.println("ProductCode:" + request.getProductCode());

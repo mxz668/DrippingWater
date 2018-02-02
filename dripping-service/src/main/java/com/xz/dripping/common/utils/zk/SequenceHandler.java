@@ -4,7 +4,7 @@ package com.xz.dripping.common.utils.zk;
 import com.xz.dripping.common.utils.DateUtils;
 
 /**
- * Created by wangwanbin on 2017/9/5.
+ *
  */
 public abstract class SequenceHandler {
 
@@ -39,5 +39,6 @@ public abstract class SequenceHandler {
         sb.append(channel).append(sequenceEnum.getCode()).append(currentDate).append(String.format("%09d", sequence));
         businessCode = sb.toString();
         return businessCode;
+
     }
 }

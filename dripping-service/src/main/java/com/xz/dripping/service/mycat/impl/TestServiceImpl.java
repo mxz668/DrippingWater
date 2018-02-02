@@ -38,7 +38,7 @@ public class TestServiceImpl implements TestService {
 
             if (lock.acquire(3, TimeUnit.SECONDS)) {
                 try {
-//                    testDao.insertSelective(test);
+                    testDao.insertSelective(test);
                 } finally {
                     lock.release();
                 }

@@ -16,7 +16,7 @@
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.0.76:3306/ams_qjs" userId="root"
+                        connectionURL="jdbc:mysql://192.168.0.76:3306/ams_p2p" userId="root"
                         password="qylc@123" />
         <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
                         <!--connectionURL="jdbc:mysql://127.0.0.1:3306/drip1" userId="root"-->
@@ -43,7 +43,7 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="ams_listed_application" domainObjectName="ListedApplication"
+        <table tableName="ams_qys_sign_contract" domainObjectName="QysSignContract"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

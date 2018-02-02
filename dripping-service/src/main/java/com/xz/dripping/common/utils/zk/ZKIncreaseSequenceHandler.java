@@ -23,7 +23,6 @@ import java.util.concurrent.Executors;
 /**
  * 基于zk的永久型自增节点PERSISTENT_SEQUENTIAL实现
  * 每次生成节点后会使用线程池执行删除节点任务,以减小zk的负担
- * Created by wangwanbin on 2017/9/5.
  */
 public class ZKIncreaseSequenceHandler extends SequenceHandler implements PooledObjectFactory<CuratorFramework> {
     private static final Logger logger = LoggerFactory.getLogger(ZKIncreaseSequenceHandler.class);
@@ -243,41 +242,46 @@ public class ZKIncreaseSequenceHandler extends SequenceHandler implements Pooled
 
     public static void main(String[] args) throws Exception{
         ExecutorService executorService = Executors.newFixedThreadPool(1);
-        long startTime = System.currentTimeMillis();   //获取开始时间--192.168.0.65
-        final ZKIncreaseSequenceHandler sequenceHandler = ZKIncreaseSequenceHandler.getInstance("127.0.0.1", "/sequence/asset", "seq");
-//        try{
-//            CuratorFramework client = (CuratorFramework) sequenceHandler.genericObjectPool.borrowObject();
-//            Stat stat = client.checkExists().forPath("/sequence/asset/123");
-//            if(null != stat){
+        long startTime = System.currentTimeMillis();   //获取开始时间--192.168.0.65 --127.0.0.1
+        final ZKIncreaseSequenceHandler sequenceHandler = ZKIncreaseSequenceHandler.getInstance("192.168.0.65", "/sequence/asset", "seq");
+        CuratorFramework client = null;
+        try{
+            client = (CuratorFramework) sequenceHandler.genericObjectPool.borrowObject();
+            client.getChildren();
+            String stat = client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL_SEQUENTIAL).forPath("/sequence/asset/123");
+            if(null != stat){
 //                client.delete().forPath("/sequence/asset/123");
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+                System.out.println(stat);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            client.close();
+        }
 
-        int count = 10;
-
-        final CountDownLatch cd = new CountDownLatch(count);
-        for (int i = 0; i < count; i++) {
-            executorService.execute(new Runnable() {
-                public void run() {
-                    System.out.printf("线程1 %s %d \n", Thread.currentThread().getId(), sequenceHandler.nextYmdId(SequenceEnum.ASSET_CODE,"20171129"));
-                    cd.countDown();
-                }
-            });
+//        int count = 10;
+//
+//        final CountDownLatch cd = new CountDownLatch(count);
+//        for (int i = 0; i < count; i++) {
+//            executorService.execute(new Runnable() {
+//                public void run() {
+//                    System.out.printf("线程1 %s %d \n", Thread.currentThread().getId(), sequenceHandler.nextYmdId(SequenceEnum.ASSET_CODE,"20171129"));
+//                    cd.countDown();
+//                }
+//            });
 //            executorService.execute(new Runnable() {
 //                public void run() {
 //                    System.out.printf("线程2 %s %d \n", Thread.currentThread().getId(), sequenceHandler.nextId(SequenceEnum.ASSET_CODE));
 //                    cd.countDown();
 //                }
 //            });
-        }
-        try {
-            cd.await();
-        } catch (InterruptedException e) {
-            logger.error("Interrupted thread", e);
-            Thread.currentThread().interrupt();
-        }
+//        }
+//        try {
+//            cd.await();
+//        } catch (InterruptedException e) {
+//            logger.error("Interrupted thread", e);
+//            Thread.currentThread().interrupt();
+//        }
         long endTime = System.currentTimeMillis(); //获取结束时间
         System.out.println("程序运行时间： " + (endTime - startTime) + "ms");
 
