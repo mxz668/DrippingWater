@@ -13,6 +13,10 @@ import java.util.Map;
  */
 public class ArrayListTest {
 
+    public void print(int i,int ... ts){
+
+    }
+
     public static void main(String args[]){
 //        List list = new ArrayList();
 //        list.add("1");

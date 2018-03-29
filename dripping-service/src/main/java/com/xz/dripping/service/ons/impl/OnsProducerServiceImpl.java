@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 public class OnsProducerServiceImpl implements OnsProducerService {
 
     @Autowired
-//    private OnsProducer onsProducer;
+    private OnsProducer onsProducer;
 
     public String pushMessage() throws Exception{
         OnsProducerRequest request = new OnsProducerRequest();
-//        request.setContent("你好");
-//        onsProducer.publishMessage("test_tianyu_demo","",request);
+        request.setContent("你好");
+        onsProducer.publishMessage("test_tianyu_demo","",request);
         return "";
     }
 }
