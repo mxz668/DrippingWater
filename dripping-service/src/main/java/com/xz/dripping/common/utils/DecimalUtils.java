@@ -4,9 +4,6 @@ import java.math.BigDecimal;
 
 /**
  * 功能: BigDecimal工具类
- * 创建: liuchongguang - liuchongguang@zillionfortune.com
- * 日期: 2017/1/9 0009 11:06
- * 版本: V1.0
  */
 public class DecimalUtils {
 

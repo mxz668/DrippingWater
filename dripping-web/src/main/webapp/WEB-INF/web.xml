@@ -16,6 +16,17 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <!-- 此过滤器一定要配置在loginCheckFilter之前 -->
+    <filter>
+        <filter-name>CORSFilter</filter-name>
+        <filter-class>com.xz.dripping.controller.CORSFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CORSFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
     <servlet>
         <servlet-name>springmvc</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

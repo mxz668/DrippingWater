@@ -17,10 +17,6 @@ import java.util.List;
 /**
  * ClassName: OssUploadUtil <br/>
  * Function: Oss上传工具. <br/>
- * Date: 2016年12月15日 下午6:34:55 <br/>
- *
- * @author mabiao@zillionfortune.com
- * @since JDK 1.7
  */
 public class OssFileUtil {
 
@@ -29,22 +25,22 @@ public class OssFileUtil {
     /**
      * 阿里云ACCESS_ID
      */
-    public static final String ACCESS_KEY_ID = "LTAIHCgkz0SQn4c9";
+    public static final String ACCESS_KEY_ID = "";
 
     /**
      * 阿里云ACCESS_KEY
      */
-    public static final String ACCESS_KEY_SECRET = "G8I2BpLp9iC5Wx0J6nlmrvkjacqAKt";
+    public static final String ACCESS_KEY_SECRET = "";
 
     /**
      * 阿里云OSS_ENDPOINT Url
      */
-    public static final String OSS_ENDPOINT = "http://oss-cn-shanghai.aliyuncs.com";
+    public static final String OSS_ENDPOINT = "";
 
     /**
      * 阿里云BUCKET_NAME OSS
      */
-    public static final String BUCKET_NAME = "bucket-zb";
+    public static final String BUCKET_NAME = "";
 
     /**
      * 是否是调试模式

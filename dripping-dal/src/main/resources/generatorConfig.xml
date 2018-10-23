@@ -16,8 +16,11 @@
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.0.76:3306/ams_batch" userId="root"
+                        connectionURL="jdbc:mysql://192.168.0.76:3306/ams_p2p" userId="root"
                         password="qylc@123" />
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
+                        <!--connectionURL="jdbc:mysql://127.0.0.1:3306/drip1" userId="root"-->
+                        <!--password="root" />-->
 
         <!-- 指定生成的类型为java类型，避免数据库中number等类型字段 -->
         <javaTypeResolver>
@@ -25,47 +28,32 @@
         </javaTypeResolver>
 
         <!-- 生成model模型，对应的包，存放位置可以指定具体的路径,如/ProjectName/src，也可以使用MAVEN来自动生成 -->
-        <javaModelGenerator targetPackage="com.zb.fincore.ams.service.dal.model"
-                            targetProject="MAVEN">
+        <javaModelGenerator targetPackage="com.zb.fincore.ams.service.dal.model" targetProject="MAVEN">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
         <!--对应的xml mapper文件 -->
-        <sqlMapGenerator targetPackage="com.zb.fincore.ams.service.dal.mapper"
-                         targetProject="MAVEN">
+        <sqlMapGenerator targetPackage="com.zb.fincore.ams.service.dal.mapper" targetProject="MAVEN">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!-- 对应的dao接口 -->
-        <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.zb.fincore.ams.service.dal.dao" targetProject="MAVEN">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zb.fincore.ams.service.dal.dao" targetProject="MAVEN">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="ams_business_credit" domainObjectName="BusinessCredit"
+        <table tableName="ams_qys_sign_contract" domainObjectName="QysSignContract"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table tableName="ams_file_template" domainObjectName="FileTemplate"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
-        <table tableName="ams_file_template_param" domainObjectName="FileTemplateParam"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
-        <table tableName="ams_issue_plan" domainObjectName="IssuePlan"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
+        <!--<table tableName="ams_finance_subject" domainObjectName="FinanceSubject"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+        <!--</table>-->
 
     </context>
 </generatorConfiguration>

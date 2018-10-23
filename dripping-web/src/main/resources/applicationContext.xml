@@ -7,16 +7,16 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-    <!--<import resource="spring-aspect.xml"/>
-    <import resource="spring-dubbo.xml"/>-->
+
+    <import resource="spring-aspect.xml"/>
+    <import resource="redis/redis-config.xml"/>
+    <!--<import resource="spring-dubbo.xml"/>-->
     <import resource="spring-mybatis.xml"/>
     <!--<import resource="spring-mns.xml"/>
     <import resource="spring-ons.xml"/>-->
 
-
     <!--开启注解功能 -->
     <context:annotation-config/>
-
     <!-- 扫描package，以完成Bean创建和自动依赖注入的功能 -->
     <context:component-scan base-package="com.xz.dripping"/>
 
@@ -32,4 +32,5 @@
 
     <!--Velocity bean-->
     <bean id="velocityFactory" class="com.xz.dripping.common.utils.VelocityFactory" init-method="init"/>
+
 </beans>
