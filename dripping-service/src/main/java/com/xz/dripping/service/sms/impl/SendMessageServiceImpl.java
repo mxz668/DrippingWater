@@ -9,7 +9,7 @@ import com.aliyun.mns.model.RawTopicMessage;
 import com.aliyun.mns.model.TopicMessage;
 import com.xz.dripping.common.sms.CloudAccountFactory;
 import com.xz.dripping.facade.dto.req.sms.SendMessageRequest;
-import com.xz.dripping.service.sms.SendMessageService;
+//import com.xz.dripping.service.sms.SendMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +18,13 @@ import org.springframework.stereotype.Service;
  * Created by MABIAO on 2017/6/5 0005.
  */
 @Service
-public class SendMessageServiceImpl implements SendMessageService {
+//implements SendMessageService
+public class SendMessageServiceImpl {
 
 //    @Autowired
     private CloudAccountFactory cloudAccountFactory = new CloudAccountFactory();
 
-    @Override
+//    @Override
     public String sendMessage(SendMessageRequest req) throws Exception {
         cloudAccountFactory.setAccessId("LTAIHCgkz0SQn4c9");
         cloudAccountFactory.setAccessKey("G8I2BpLp9iC5Wx0J6nlmrvkjacqAKt");
